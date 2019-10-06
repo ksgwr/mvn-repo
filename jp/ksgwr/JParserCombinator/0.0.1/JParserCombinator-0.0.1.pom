@@ -7,9 +7,6 @@
   <packaging>jar</packaging>
   <name>JParserCombinator</name>
 
-  <properties>
-    <github.global.server>github</github.global.server>
-  </properties>
   <distributionManagement>
     <repository>
       <id>internal.repo</id>
@@ -103,6 +100,7 @@
           <merge>true</merge>
           <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
           <branch>refs/heads/gh-pages</branch>
+          <oauth2Token>${env.GITHUB_API_TOKEN}</oauth2Token>
           <repositoryName>mvn-repo</repositoryName>
           <repositoryOwner>ksgwr</repositoryOwner>
         </configuration>
