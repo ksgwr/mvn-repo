@@ -8,13 +8,13 @@
   <name>JParserCombinator</name>
 
   <properties>
-    <github.repo.directory>/git/mvn-repo</github.repo.directory>
+    <github.global.server>github</github.global.server>
   </properties>
   <distributionManagement>
     <repository>
       <id>internal.repo</id>
       <name>Local Github Pages</name>
-      <url>file://${github.repo.directory}</url>
+      <url>file://${project.build.directory}/mvn-repo</url>
     </repository>
   </distributionManagement>
 
@@ -91,6 +91,28 @@
             <phase>deploy</phase>
             <goals>
               <goal>deploy</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.12</version>
+        <configuration>
+          <message>Maven artifacts for ${project.version}</message>
+          <noJekyll>true</noJekyll>
+          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+          <branch>refs/heads/gh-pages</branch>
+          <includes><include>**/*</include></includes>
+          <repositoryName>mvn-repo</repositoryName>
+          <repositoryOwner>ksgwr</repositoryOwner>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>deploy</phase>
+            <goals>
+              <goal>site</goal>
             </goals>
           </execution>
         </executions>
